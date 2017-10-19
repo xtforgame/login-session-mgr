@@ -1,6 +1,4 @@
-# AzDevBase
-
-A general purpose seed project base
+# Login Session Manager
 
 Run `npm install`
 

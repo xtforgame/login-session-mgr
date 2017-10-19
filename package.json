@@ -1,19 +1,12 @@
 {
-  "name": "az-dev-base",
-  "version": "1.0.0",
-  "description": "A general purpose seed project base",
-  "main": "dist/library/index.js",
+  "name": "login-session-mgr",
+  "version": "0.1.0",
+  "description": "Login Session Manager",
+  "main": "dist/index.js",
   "repository": {
     "type": "git"
   },
-  "keywords": [
-    "gulp",
-    "seed",
-    "boilerplate",
-    "kickstarter",
-    "ES6",
-    "6to5"
-  ],
+  "keywords": [],
   "author": "Rick Chen <xtforgame@gmail.com>",
   "scripts": {
     "lint": "eslint --ext .jsx,.js ./src",
@@ -24,9 +17,6 @@
     "test-watch": "eslint ./test/library && cross-env NODE_ENV=test mocha --watch ./test --watch-extensions js,jsx --compilers js:babel-core/register ./test/library/**/*.spec.js"
   },
   "license": "MIT",
-  "engines": {
-    "node": ">=7.0"
-  },
   "dependencies": {},
   "devDependencies": {
     "az-gulp-env-lite": "git+https://github.com/xtforgame/az-gulp-env-lite#v0.4.0",
