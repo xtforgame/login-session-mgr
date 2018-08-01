@@ -1,6 +1,6 @@
-export default function echo(data, err){
+export default function echo(data, err) {
   return new Promise((resolve, reject) => {
-    if(err){
+    if (err) {
       return reject(err);
     }
     return resolve(data);

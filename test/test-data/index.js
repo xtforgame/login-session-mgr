@@ -1,9 +1,9 @@
-let data01 = {
+const data01 = {
   val01: 1,
   val02: 'val02',
 };
 
-let err01 = {
+const err01 = {
   message: 'Error',
 };
 
