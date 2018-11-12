@@ -10,10 +10,9 @@
       "plugins": [
         ["module-resolver", {
           "alias": {
-            "~": "./src/test/library",
+            "~": "./src/test-data",
             "library": "./src/library",
-            "test-utils": "./src/test-utils",
-            "test-data": "./src/test-data"
+            "test-utils": "./src/test-utils"
           }
         }]
       ]
@@ -22,10 +21,9 @@
       "plugins": [
         ["module-resolver", {
           "alias": {
-            "~": "./src/test/library",
+            "~": "./src/test-data",
             "library": "./src/library",
-            "test-utils": "./src/test-utils",
-            "test-data": "./src/test-data"
+            "test-utils": "./src/test-utils"
           }
         }]
       ]
@@ -34,10 +32,9 @@
       "plugins": [
         ["module-resolver", {
           "alias": {
-            "~": "./src/test/library",
+            "~": "./src/test-data",
             "library": "./src/library",
-            "test-utils": "./src/test-utils",
-            "test-data": "./src/test-data"
+            "test-utils": "./src/test-utils"
           }
         }]
       ]
