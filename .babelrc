@@ -1,17 +1,37 @@
 {
-  "presets": [["env", {
-    "targets": { 
-      "node": "10"
-    }
-  }]],
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": { 
+        "node": "10"
+      }
+    }],
+    "@babel/typescript"
+  ],
   "plugins": [
-    "transform-decorators-legacy",
-    "transform-class-properties",
-    "transform-object-rest-spread",
+    "@babel/proposal-class-properties",
+    "@babel/proposal-object-rest-spread"
   ],
   "env": {
-    "test": {},
-    "development": {},
-    "production": {},
+    "test": {
+      "plugins": [
+        ["module-resolver", {
+          "extensions": [".js", ".ts"]
+        }]
+      ]
+    },
+    "development": {
+      "plugins": [
+        ["module-resolver", {
+          "extensions": [".js", ".ts"]
+        }]
+      ]
+    },
+    "production": {
+      "plugins": [
+        ["module-resolver", {
+          "extensions": [".js", ".ts"]
+        }]
+      ]
+    },
   }
 }

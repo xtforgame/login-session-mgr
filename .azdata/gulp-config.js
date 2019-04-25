@@ -11,7 +11,11 @@ var config = {
       entry: {
         dir: 'src/library',
         js: {
-          glob: '**/*.js',
+          glob: '**/*.{js,ts}',
+        },
+        ts: {
+          tsconfig: 'tsconfig.json',
+          glob: '**/*.ts',
         },
       },
       output: {
