@@ -20,7 +20,7 @@ var config = {
       },
       output: {
         default: {
-          dir: 'dist/library',
+          dir: 'dist',
         },
         //dev: {},
         //dist: {},

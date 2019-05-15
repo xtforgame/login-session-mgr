@@ -1,19 +1,12 @@
 {
-  "name": "az-dev-base",
-  "version": "1.0.0",
-  "description": "A general purpose seed project base",
-  "main": "dist/library/index.js",
+  "name": "login-session-mgr",
+  "version": "0.1.0",
+  "description": "Login Session Manager",
+  "main": "dist/index.js",
   "repository": {
     "type": "git"
   },
-  "keywords": [
-    "gulp",
-    "seed",
-    "boilerplate",
-    "kickstarter",
-    "ES6",
-    "6to5"
-  ],
+  "keywords": [],
   "author": "Rick Chen <xtforgame@gmail.com>",
   "scripts": {
     "lint": "eslint --ext .js ./src && tslint -c ./tslint.json './src/**/*.ts'",
@@ -22,8 +15,8 @@
     "lint-all-fix": "eslint --fix --ext .js ./src ./test ./internals&& tslint --fix -c ./tslint.json './src/**/*.ts'",
     "build": "cross-env NODE_ENV=production gulp library:build",
     "start": "cross-env NODE_ENV=development gulp library:watch:dev",
-    "test": "eslint --ext .js ./test/library && cross-env NODE_ENV=test mocha --require @babel/core/register './test/library/**/*.spec.js'",
-    "test-watch": "eslint --ext .js ./test/library && cross-env NODE_ENV=test mocha --watch ./test --watch-extensions js --require @babel/core/register './test/library/**/*.spec.js'"
+    "test": "eslint --ext .js ./test/library && cross-env NODE_ENV=test mocha --require @babel/register './test/library/**/*.spec.js'",
+    "test-watch": "eslint --ext .js ./test/library && cross-env NODE_ENV=test mocha --watch ./test --watch-extensions js --require @babel/register './test/library/**/*.spec.js'"
   },
   "license": "MIT",
   "dependencies": {},
