@@ -6,12 +6,11 @@ import path from 'path';
 import {
   LoggedInSession,
   SessionManager,
-} from '../../dist/session-manager';
-
+} from 'library';
 
 const { expect, assert } = chai;
 
-describe('Linked list test', () => {
+describe('Session Manager test', () => {
   describe('Basic', () => {
     const loginType01 = (sessionMgr, uid) => sessionMgr.login(uid, {
       connectUid: 'hi',
@@ -63,8 +62,7 @@ describe('Linked list test', () => {
       const sessionMgr = new SessionManager({
         onLoggedOut: ((existedSession, reason) => {
           loggedOutEventTriggered = true;
-          // expect(reason, 'reason').to.be.an.instanceof(SessionManager.LogoutReason.RegularLogout);
-          expect(reason, 'reason').to.equal(SessionManager.LogoutReason.RegularLogout);
+          expect(reason, 'reason').to.equal(sessionMgr.getLogoutReasons().RegularLogout);
           verifyUserType01(existedSession, 1);
         }),
       });
@@ -91,7 +89,7 @@ describe('Linked list test', () => {
       return loginType01(sessionMgr, 1)
       .then(newSession => sessionMgr.unexpectedLogout(1, 'ConnectionLost'))
       .then((existedSession) => {
-        expect(sessionMgr.inactiveSessions[1], 'sessionMgr.inactiveSessions[1]').to.exist;
+        expect(sessionMgr.inactiveSessions.get(1), 'sessionMgr.inactiveSessions[1]').to.exist;
         expect(existedSession, 'existedSession').to.be.an('object');
         expect(unexpectedLoggedOutTriggered, 'unexpectedLoggedOutTriggered').to.equal(true);
         return existedSession;
@@ -139,7 +137,7 @@ describe('Linked list test', () => {
         throw Error('Passed');
       })
       .catch((error) => {
-        expect(error.message, 'error.message').to.equal(SessionManager.ErrorMessage.DuplicateLogin);
+        expect(error.message, 'error.message').to.equal(sessionMgr.getLogoutReasons().DuplicateLogin);
         expect(duplicateLoginEventTriggered, 'duplicateLoginEventTriggered').to.equal(true);
         return error;
       });

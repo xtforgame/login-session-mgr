@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SessionManager = void 0;
+exports["default"] = void 0;
 
 var _interfaces = require("./core/interfaces");
 
@@ -209,4 +209,4 @@ var SessionManager = function () {
   return SessionManager;
 }();
 
-exports.SessionManager = SessionManager;
+exports["default"] = SessionManager;

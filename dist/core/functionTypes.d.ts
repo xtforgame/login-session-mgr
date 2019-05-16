@@ -1,0 +1,10 @@
+import { LogoutReason } from './interfaces';
+export declare type OnLoggedInFunction<SessionInfo> = (session: SessionInfo) => any;
+export declare type LogoutExistedOneInFunction<SessionInfo> = () => any;
+export declare type DenyLoginFunction<SessionInfo> = () => any;
+export declare type OnDuplicateLoginFunction<SessionInfo> = (existedSession: SessionInfo, newSession: SessionInfo, logoutExistedOne: LogoutExistedOneInFunction<SessionInfo>, denyLogin: DenyLoginFunction<SessionInfo>) => any;
+export declare type OnUnexpectedLoggedOutFunction<SessionInfo> = (session: SessionInfo, reason: LogoutReason) => any;
+export declare type OnReloggedInFunction<SessionInfo> = (session: SessionInfo, newData: Object) => any;
+export declare type OnLoggedOutFunction<SessionInfo> = (session: SessionInfo, reason: LogoutReason) => any;
+export declare type OnUserLoggedInFunction<UserInfo> = (user: UserInfo) => any;
+export declare type OnUserLoggedOutFunction<UserInfo> = (user: UserInfo, reason: LogoutReason) => any;

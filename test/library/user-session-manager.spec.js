@@ -5,12 +5,12 @@ import chai from 'chai';
 import path from 'path';
 import {
   UserSessionManager,
-} from '../../dist/user-session-manager';
+} from 'library';
 
 
 const { expect, assert } = chai;
 
-describe('Linked list test', () => {
+describe('User Session Manager test', () => {
   describe('Basic', () => {
     const loginType01 = (userSessionMgr, uid, session) => userSessionMgr.login(uid, session, {
       connectUid: 'hi',
@@ -28,8 +28,8 @@ describe('Linked list test', () => {
       expect(newUser, 'newUser').to.be.an('object');
       expect(newUser.uid, 'newUser.uid').to.equal(uid);
       expect(newUser.data, 'newUser.data').to.be.an('object');
-      expect(newUser.sessions, 'newUser.sessions').to.be.an('object');
-      verifySessionType01(newUser.sessions[session]);
+      expect(newUser.sessionMap, 'newUser.sessionMap').to.be.an.instanceof(Map);
+      verifySessionType01(newUser.sessionMap.get(session));
       return newUser;
     };
 
@@ -78,7 +78,7 @@ describe('Linked list test', () => {
         }),
         onSessionLoggedOut: ((existedSession, reason) => {
           sessionLoggedOutEventTriggered = true;
-          expect(reason, 'reason').to.equal(UserSessionManager.LogoutReason.RegularLogout);
+          expect(reason, 'reason').to.equal(userSessionMgr.getLogoutReasons().RegularLogout);
           verifySessionType01(existedSession);
         }),
       });
@@ -106,7 +106,7 @@ describe('Linked list test', () => {
       return loginType01(userSessionMgr, 1, 'session1')
       .then(newUser => userSessionMgr.unexpectedLogout('session1', 'ConnectionLost'))
       .then((existedSession) => {
-        expect(userSessionMgr.sessionManager.inactiveSessions.session1, 'userSessionMgr.sessionManager.inactiveSessions["session1"]').to.exist;
+        expect(userSessionMgr.sessionManager.inactiveSessions.get('session1'), 'userSessionMgr.sessionManager.inactiveSessions.get("session1")').to.exist;
         expect(existedSession, 'existedSession').to.be.an('object');
         expect(sessionUnexpectedLoggedOutTriggered, 'sessionUnexpectedLoggedOutTriggered').to.equal(true);
         return existedSession;
@@ -154,7 +154,7 @@ describe('Linked list test', () => {
         throw Error('Passed');
       })
       .catch((error) => {
-        expect(error.message, 'error.message').to.equal(UserSessionManager.ErrorMessage.DuplicateLogin);
+        expect(error.message, 'error.message').to.equal(userSessionMgr.getLogoutReasons().DuplicateLogin);
         expect(sessionDuplicateLoginEventTriggered, 'sessionDuplicateLoginEventTriggered').to.equal(true);
         return error;
       });

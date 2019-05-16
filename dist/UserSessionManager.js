@@ -3,13 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UserSessionManager = void 0;
+exports["default"] = void 0;
+
+var _interfaces = require("./core/interfaces");
 
 var _LoggedInSession = _interopRequireDefault(require("./core/LoggedInSession"));
 
 var _LoggedInUser = _interopRequireDefault(require("./core/LoggedInUser"));
 
-var _sessionManager = require("./session-manager");
+var _SessionManager = _interopRequireDefault(require("./SessionManager"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -33,6 +35,10 @@ var UserSessionManager = function () {
 
     _defineProperty(this, "_userMap", void 0);
 
+    _defineProperty(this, "getLogoutReasons", void 0);
+
+    _defineProperty(this, "getErrorMessages", void 0);
+
     _defineProperty(this, "onSessionLoggedIn", void 0);
 
     _defineProperty(this, "onSessionDuplicateLogin", void 0);
@@ -50,6 +56,8 @@ var UserSessionManager = function () {
     var o = options || {};
     this.SessionInfoClass = o.SessionInfoClass || _LoggedInSession["default"];
     this.UserInfoClass = o.UserInfoClass || _LoggedInUser["default"];
+    this.getLogoutReasons = o.LogoutReasonsProvider || _interfaces.defaultLogoutReasonsProvider;
+    this.getErrorMessages = o.ErrorMessagesProvider || _interfaces.defaultErrorMessagesProvider;
     var onSessionLoggedIn = options.onSessionLoggedIn,
         onSessionDuplicateLogin = options.onSessionDuplicateLogin,
         onSessionUnexpectedLoggedOut = options.onSessionUnexpectedLoggedOut,
@@ -75,7 +83,7 @@ var UserSessionManager = function () {
 
     this.onUserLoggedOut = onUserLoggedOut || function (user, reason) {};
 
-    this.sessionManager = new _sessionManager.SessionManager({
+    this.sessionManager = new _SessionManager["default"]({
       onLoggedIn: this.onSessionLoggedIn,
       onDuplicateLogin: this.onSessionDuplicateLogin,
       onUnexpectedLoggedOut: this.onSessionUnexpectedLoggedOut,
@@ -124,7 +132,7 @@ var UserSessionManager = function () {
         }
 
         newSession.user = user;
-        user.sessions[sessionUid] = newSession;
+        user.sessionMap.set(sessionUid, newSession);
 
         if (isNewUser) {
           _this.onUserLoggedIn(user);
@@ -180,4 +188,4 @@ var UserSessionManager = function () {
   return UserSessionManager;
 }();
 
-exports.UserSessionManager = UserSessionManager;
+exports["default"] = UserSessionManager;
